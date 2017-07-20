@@ -12,5 +12,7 @@ l=[]
 for a in soup.find_all('a', href=True):
     #print(a['href'])
     l.append(a['href'])
+    print (a['href'].startswith('https://'))
+    print(a['href'])
     
-print (l)
+print (l[10])
