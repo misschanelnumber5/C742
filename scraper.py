@@ -2,7 +2,11 @@ import requests
 from bs4 import BeautifulSoup, SoupStrainer
 import bs4
 import re
+import csv
+import os
 
+os.remove('file.csv')
+outFile= file("file.csv",'w')
 #define link to scrape
 search_link = "https://www.census.gov/data/tables/2016/demo/popest/state-total.html"
 
@@ -14,22 +18,26 @@ raw_html = r.text
 soup = BeautifulSoup(raw_html, 'html.parser')
 #define variable to add to the beginning of relative links to complete the URL
 baseLink="https://www.census.gov"
-#define empty list for data points to be added
-l=[]
+#define empty set for data points to be added
+#set are unable to store duplicates
+linkSet= set()
 
 #This loop will find every a tag with href inside and interate through each result
+#if it is an external link, no changes will be made
+#if it is a relative link, the base URL will be added to the beginning
 for a in soup.find_all('a', href=True):
-    #define tf as a variable containing the true/false result of the question, does this link start with http? This will find relative/universal links
+
     tf=a['href'].startswith('http')
-    #if it does start with HTTP
+
     if tf == True:
-    	#print('extLink - ' + a['href'])
     	link=a['href']
-    #if it doesn't start with HTTP
     else:
-    	#print('notExtLink - ' + baseLink + a['href'])
     	link=baseLink + a['href']
-    #append list to contain all of the values
-    l.append(link)
-print(l)
+    #add formed URL into the set defined above	
+    linkSet.add(link)
+
+#take all of the links imported into the set and extract them into a CSV file
+# the set is unable to store duplicates so this method will prevent all duplicates from being extracted
+for i in linkSet:
+	outFile.write(i + '\n')
     
