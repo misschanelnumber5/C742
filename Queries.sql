@@ -120,7 +120,7 @@ select a.state, a.pop16-a.pop15 as newpop
             where a.pop16-a.pop15 > 10000
 ;
 
-select b.* 
+select b.diff*-1,b.* 
 	from (
 		select a.pop16-a.pop15 as diff, a.* 
 			from ( 
