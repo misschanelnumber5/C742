@@ -45,7 +45,7 @@ select b.state as State,b.pop15 as 'Population 2015', b.pop16 as 'Population 201
 select 
 	a.state as State,
 	a.pop15 as 'Population 2015', 
-    a.pop16 as 'Population 2016', (a.pop16-a.pop15)*-1 as Difference 
+    a.pop16 as 'Population 2016', ABS(a.pop16-a.pop15)*-1 as Difference 
 		from (
 			select 
 				pop2015.state,
