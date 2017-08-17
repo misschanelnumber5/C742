@@ -5,8 +5,8 @@ import re
 import csv
 import os
 
-os.remove('file.csv')
-outFile= file("file.csv",'w')
+os.remove('links.csv')
+outFile= file("links.csv",'w')
 #define link to scrape
 search_link = "https://www.census.gov/data/tables/2016/demo/popest/state-total.html"
 
