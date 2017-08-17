@@ -7,6 +7,7 @@ import os
 
 os.remove('links.csv')
 outFile= file("links.csv",'w')
+outFile2= file("htmlFile.txt",'w')
 #define link to scrape
 search_link = "https://www.census.gov/data/tables/2016/demo/popest/state-total.html"
 
@@ -40,4 +41,8 @@ for a in soup.find_all('a', href=True):
 # the set is unable to store duplicates so this method will prevent all duplicates from being extracted
 for i in linkSet:
 	outFile.write(i + '\n')
+	print(i)
+outFile2.write(raw_html.encode('utf-8'))
+print("exporting links and HTML")
+
     
