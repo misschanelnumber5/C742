@@ -1,0 +1,7 @@
+floPop= read.table("floPopEst.tab", header=FALSE) 
+plot(V2 ~ V1, data=floPop, xlab= "Year", ylab = "Population", xlim = c(2010, 2020), main="Estimated Population in Florida" )
+points(V2 ~ V1, floPop, subset = V1 <= 2016, pch = 20)
+points(V2 ~ V1, floPop, subset = V1 >= 2017, pch = 1)
+abline(model <- lm(V2 ~ V1, data=floPop))
+legend("topleft", legend = c("Census Data", "Estimated Data"), pch = c(20, 1), bty = "n")
+coef(model)
